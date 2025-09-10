@@ -1,6 +1,6 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
-import { WhitelistStatus } from "./types";
+import { WhitelistStatus } from "../types";
 
 interface WlShareCardProps {
   wallet: string;
@@ -14,7 +14,7 @@ const WlShareCard: React.FC<WlShareCardProps> = ({ wallet, status }) => {
 
   const wlType = status === WhitelistStatus.GTD ? "GTD" : "FCFS";
   const message = `Wallet ${wallet} is whitelisted for Bastards ${wlType} PASS ✅`;
-  const url = "https://bastards-checker.vercel.app/"; // <-- replace with your live app url
+  const url = "https://bastards-checker.vercel.app/"; // your live app url
   const hashtags = "BastardsGTD,Whitelist";
 
   const twitterIntent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(

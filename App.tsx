@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { GTD_WHITELIST, FCFS_WHITELIST } from './constants';
 import { WhitelistStatus } from './types';
+import WlShareCard from "./components/WlShareCard";
 
 // --- Component from components/WalletInput.tsx ---
 interface WalletInputProps {
