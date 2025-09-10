@@ -3,20 +3,18 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), ""); // load .env vars
+  const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    plugins: [react()], // ✅ ensure React fast-refresh & JSX handling
+    plugins: [react()],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname), // root-level alias
-        components: path.resolve(__dirname, "components"), // optional extra alias
+        "@": path.resolve(__dirname),
+        components: path.resolve(__dirname, "components"),
       },
     },
     define: {
-      // ✅ safer access to env vars
       "process.env": {
-        API_KEY: env.GEMINI_API_KEY,
         GEMINI_API_KEY: env.GEMINI_API_KEY,
       },
     },
