@@ -12,7 +12,7 @@ const WlShareCard: React.FC<WlShareCardProps> = ({ wallet, status }) => {
   }
 
   const wlType = status === WhitelistStatus.GTD ? "GTD" : "FCFS";
-  const message = `I'm whitelisted for Bastards ${wlType} PASS 🎉`;
+  const message = `I'm whitelisted for Bastards ${wlType} PASS 🎉\n`;
   const url = "https://bastards-checker.vercel.app/"; // OG tags will handle banner
   const hashtags = "BastardsGTD,Whitelist";
 
