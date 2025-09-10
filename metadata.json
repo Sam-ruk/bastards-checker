@@ -1,0 +1,5 @@
+{
+  "name": "Bastards GTD PASS Checker",
+  "description": "Check if your wallet address is on the whitelist for The Bastards GTD Pass minting event.",
+  "requestFramePermissions": []
+}
