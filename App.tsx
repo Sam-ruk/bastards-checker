@@ -212,6 +212,7 @@ const App: React.FC = () => {
               <div className="h-8 mt-4">
                 <ResultDisplay status={status} />
               </div>
+              <WlShareCard wallet={walletAddress} status={status} />
             </div>
           </div>
         </main>
