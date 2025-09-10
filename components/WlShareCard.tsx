@@ -1,5 +1,4 @@
 import React from "react";
-import { CheckCircle } from "lucide-react";
 import { WhitelistStatus } from "../types";
 
 interface WlShareCardProps {
@@ -22,23 +21,41 @@ const WlShareCard: React.FC<WlShareCardProps> = ({ wallet, status }) => {
   )}&url=${encodeURIComponent(url)}&hashtags=${hashtags}`;
 
   return (
-    <div className="mt-6">
-      <div className="rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 shadow-lg p-6 text-white text-center">
-        <CheckCircle className="w-12 h-12 mx-auto mb-4 text-green-300" />
+    <div className="mt-6 animate-fade-in">
+      <div className="rounded-2xl bg-white/10 backdrop-blur-xl shadow-xl ring-1 ring-white/10 p-6 text-white text-center">
+        {/* Your artwork image */}
+        <img
+          src="https://i.ibb.co/C3CPhLLP/5es4aj.jpg"
+          alt="Bastards Artwork"
+          className="w-20 h-20 mx-auto mb-4 rounded-full ring-2 ring-indigo-400 object-cover"
+        />
+
         <h2 className="text-xl font-semibold mb-2">You’re Whitelisted 🎉</h2>
         <p className="text-sm mb-4">
           Wallet <span className="font-mono">{wallet}</span> is on the{" "}
           <span className="font-bold">{wlType}</span> list.
         </p>
+
         <a
           href={twitterIntent}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-xl bg-white text-indigo-700 font-medium px-4 py-2 hover:bg-gray-100 transition"
+          className="inline-block rounded-xl bg-indigo-600 text-white font-medium px-4 py-2 hover:bg-indigo-700 transition"
         >
           Share on X
         </a>
       </div>
+
+      {/* Small fade-in animation */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.6s ease-in-out;
+        }
+      `}</style>
     </div>
   );
 };
