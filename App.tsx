@@ -185,7 +185,7 @@ const App: React.FC = () => {
         <p className="mt-6 text-base leading-7 text-gray-300">
           If you're a Beast (GTD Mainnet role) in Bastards DC, you're not eligible for the GTD Pass.
         </p>
-        <p className="mt-6 text-base leading-7 text-gray-300">
+        <p className="mt-1 text-base leading-7 text-gray-300">
           The GTD Pass is exclusive to our supporters on X.
         </p>
       </div>
