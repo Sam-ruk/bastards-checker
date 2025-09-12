@@ -183,10 +183,13 @@ const App: React.FC = () => {
           “Not just a mint, a movement.”
         </p>
         <p className="mt-6 text-base leading-7 text-gray-300">
-          If you're a Beast (GTD Mainnet role) in Bastards DC, you're not eligible for the GTD Pass.
+          If you already have Beast role, you’re not eligible for the GTD Pass — yes, that’s correct.
         </p>
         <p className="mt-0 text-base leading-7 text-gray-300">
-          The GTD Pass is exclusive to our supporters on X.
+          Why? Because Beast = GTD on MAINNET.
+        </p>
+        <p className="mt-0 text-base leading-7 text-gray-300">
+          And the GTD Pass is something different — it’s exclusive to X.
         </p>
       </div>
 
