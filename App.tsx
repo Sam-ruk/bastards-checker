@@ -182,6 +182,9 @@ const App: React.FC = () => {
         <p className="mt-4 text-lg italic text-indigo-300">
           “Not just a mint, a movement.”
         </p>
+        <p className="mt-6 text-base leading-7 text-gray-300">
+          If you're a Beast (GTD Mainnet role) in Bastards DC, you're not eligible for the GTD Pass. The GTD Pass is exclusive to our supporters on X.
+        </p>
       </div>
 
       <div className="relative z-10 my-8 w-full max-w-lg">
