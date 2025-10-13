@@ -65,7 +65,7 @@ export default function HomeSection() {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden text-white font-bold">
+    <div className="relative w-full lg:min-h-screen oerflow-x-hidden text-white font-bold">
       {/* Mobile - Split background */}
       <div className="lg:hidden absolute inset-0">
         {/* Top section - shows left portion of background (wallet area) */}
@@ -75,7 +75,7 @@ export default function HomeSection() {
             backgroundImage: "url('/main-bg.png')", 
             backgroundSize: "200% 100%", 
             backgroundPosition: "left center",
-            height: "460px",
+            height: "490px",
             maskImage: "linear-gradient(to bottom, white 90%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, white 90%, transparent 100%)"
           }}
@@ -84,10 +84,10 @@ export default function HomeSection() {
         <div 
           className="absolute left-0 w-full bottom-0 bg-no-repeat"
           style={{ 
-            backgroundImage: "url('/main-bg.png')", 
+            backgroundImage: "url('/bg-main-2.png')", 
             backgroundSize: "200% 100%", 
             backgroundPosition: "right center",
-            top: "430px",
+            top: "465px",
             maskImage: "linear-gradient(to top, black 90%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to top, black 90%, transparent 100%)"
           }}
@@ -139,16 +139,16 @@ export default function HomeSection() {
 
       <div className="absolute top-13 left-0 w-full h-1 bg-white z-20" />
 
-      <div className="absolute top-18 sm:top-20 left-1/2 transform -translate-x-1/2 text-center z-20 px-4 w-full max-w-7xl">
-        <p className={`${chewy.className} text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl`}>
+      <div className="absolute top-18 sm:top-20 left-1/2 transform -translate-x-1/2 text-center z-20 px-2 w-full max-w-7xl">
+        <p className={`${chewy.className} text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl`}>
           The Bastards step first into Monad.
         </p>
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-2" style={{ fontFamily: 'Arial' }}>
+        <p className="text-md sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-2" style={{ fontFamily: 'Arial' }}>
           Check your whitelist status now — the mainnet awaits the bold.
         </p>
       </div>
 
-      <div className="absolute top-49 sm:top-56 md:top-53 left-1/2 lg:left-25 transform -translate-x-1/2 lg:translate-x-0 flex flex-col items-start bg-purple-200/90 p-6 sm:p-8 rounded-3xl z-20 w-11/12 sm:w-4/5 md:w-3/5 lg:w-130 max-w-2xl shadow-2xl">
+      <div className="absolute top-54 sm:top-56 md:top-53 left-1/2 lg:left-25 transform -translate-x-1/2 lg:translate-x-0 flex flex-col items-start bg-purple-200/90 p-6 sm:p-8 rounded-3xl z-20 w-11/12 sm:w-4/5 md:w-3/5 lg:w-130 max-w-2xl shadow-2xl">
         <p className="text-black text-base sm:text-lg mb-4 sm:mb-6 italic font-semibold">
           Enter your wallet address to check your WL status.
         </p>
@@ -218,33 +218,35 @@ export default function HomeSection() {
       </div>
 
       {/* Mobile - positioned below wallet box */}
-      <div className="lg:hidden flex flex-col items-center relative z-10 mt-[350px] sm:mt-[480px] md:mt-[520px] px-4">
-        <div className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
-          <Image
-            src="/monad-logo.png"
-            alt="Monad Logo"
-            fill
-            className="animate-spin object-contain"
-            style={{ animation: 'spin 10s linear infinite' }}
-          />
-        </div>
-        <div className="relative w-72 h-32 sm:w-80 sm:h-36 -mt-40">
-          <Image
-            src="/bastards.png"
-            alt="Bastards Overlay"
-            fill
-            className="object-contain"
-          />
-        </div>
-        <div className="relative w-67 h-14 sm:w-80 sm:h-16 -mt-4">
-          <Image
-            src="/bastards_flipped.png"
-            alt="Flipped Bastards Overlay"
-            fill
-            className="object-contain opacity-50"
-          />
-        </div>
-      </div>
+<div className="lg:hidden flex flex-col items-center relative z-10 mt-[420px] sm:mt-[460px] md:mt-[500px] px-4 pb-0 mb-[-10px] overflow-hidden">
+  <div className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+    <Image
+      src="/monad-logo.png"
+      alt="Monad Logo"
+      fill
+      className="animate-spin object-contain"
+      style={{ animation: "spin 10s linear infinite" }}
+    />
+  </div>
+
+  <div className="relative w-90 h-36 sm:w-80 sm:h-36 z-2 -mt-36">
+    <Image
+      src="/bastards.png"
+      alt="Bastards Overlay"
+      fill
+      className="object-contain"
+    />
+  </div>
+
+  <div className="relative w-76 h-30 sm:w-80 sm:h-16 z-1 -mt-10 mb-[-20px]">
+    <Image
+      src="/bastards_flipped.png"
+      alt="Flipped Bastards Overlay"
+      fill
+      className="object-contain opacity-50"
+    />
+  </div>
+</div>
 
       <div className="absolute inset-0 z-0" />
     </div>
