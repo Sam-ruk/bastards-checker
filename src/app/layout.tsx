@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     url: "https://bastards-checker.vercel.app/",
     images: [
       {
-        url: '/banner.png', 
-        width: 1023,
-        height: 721,
+        url: '/banner.png?v=1', 
+        width: 1023, 
+        height: 721, 
         alt: 'Bastards Banner',
       }
     ],
