@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/banner.png', 
-        width: 1200,
-        height: 630,
+        width: 1023,
+        height: 721,
         alt: 'Bastards Banner',
       }
     ],
@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en">  
       <head>
         <link rel="icon" href="/bas_logo.jpg" type="image/jpg" />
         <link href="https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap" rel="stylesheet"/>

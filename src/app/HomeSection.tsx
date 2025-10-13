@@ -55,7 +55,7 @@ export default function HomeSection() {
   const postOnX = () => {
     const message = `🎉 Wow, I'm eligible to mint Bastards on Monad Mainnet 🎉\n Check your's :`;
     const url = "https://bastards-checker.vercel.app/";
-    const hashtags = "Bastards,GTD,Whitelist,Monad";
+    const hashtags = "Bastards,Monad";
     
     const twitterIntent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       message
