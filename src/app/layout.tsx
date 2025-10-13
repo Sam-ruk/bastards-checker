@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Bastards WL Checker",
     description: "Checker for Bastards NFT.",
-    images: ['/banner.png'], 
+    images: ['/banner.png?v=1'],
   },
 };
 
