@@ -53,7 +53,7 @@ export default function HomeSection() {
   };
 
   const postOnX = () => {
-    const message = `🎉 Wow, I'm eligible to mint Bastards on Monad Mainnet 🎉\n Check your's :`;
+    const message = `🎉 Wow, I'm eligible to mint Bastards on Monad Mainnet 🎉\n Check yours :`;
     const url = "bastards-checker.vercel.app/";
     const hashtags = "Bastards,Monad";
     
