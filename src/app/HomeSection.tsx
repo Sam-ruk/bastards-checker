@@ -170,7 +170,7 @@ export default function HomeSection() {
         )}
 
         {hasChecked && (
-          <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+          <div className="mt-4 flex flex-row sm:flex-row items-center justify-center gap-4 w-full">
             {isWhitelisted ? (
               <>
                 <p className="text-green-800 text-lg sm:text-xl font-bold">Whitelisted ✅</p>
