@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     url: "https://bastards-checker.vercel.app/",
     images: [
       {
-        url: '/banner.png?v=1', 
-        width: 1023, 
-        height: 721, 
+        url: '/banner.png?v=2', 
+        width: 1023,
+        height: 721,
         alt: 'Bastards Banner',
       }
     ],
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Bastards WL Checker",
     description: "Checker for Bastards NFT.",
-    images: ['/banner.png?v=1'],
+    images: ['/banner.png?v=2'], 
   },
 };
 
