@@ -7,9 +7,9 @@ import { Chewy } from "next/font/google";
 const chewy = Chewy({ subsets: ["latin"], weight: "400" });
 
 export default function HomeSection() {
-  const [wallet, setWallet] = useState("");
-  const [isWhitelisted, setIsWhitelisted] = useState(null);
-  const [hasChecked, setHasChecked] = useState(false);
+  const [wallet, setWallet] = useState<string>("");
+  const [isWhitelisted, setIsWhitelisted] = useState<boolean | null>(null);
+  const [hasChecked, setHasChecked] = useState<boolean>(false);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
