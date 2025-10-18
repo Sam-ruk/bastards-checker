@@ -106,7 +106,7 @@ export default function HomeSection() {
       >
         <div className="flex items-center">
           <Image
-            src="/bas_logo.jpg"
+            src="/bas_logo.png"
             alt="Bastards Logo"
             width={35}
             height={35}
