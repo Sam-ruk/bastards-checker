@@ -186,7 +186,7 @@ export default function LightningRingDialog({
         className="p-0 border-0 bg-transparent max-w-[min(85vw,340px)] overflow-visible"
       >
         <VisuallyHidden>
-          <DialogTitle>{username}'s Basterds Card</DialogTitle>
+          <DialogTitle>{username}&apos;s Basterds Card</DialogTitle>
         </VisuallyHidden>
 
         <div
