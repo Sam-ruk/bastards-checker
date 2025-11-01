@@ -3,12 +3,25 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Chewy } from "next/font/google";
+import LightningRingCard from "./LightningRingCard";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const chewy = Chewy({ subsets: ["latin"], weight: "400" });
 
 export default function HomeSection() {
   const [wallet, setWallet] = useState<string>("");
-  const [isWhitelisted, setIsWhitelisted] = useState<boolean | null>(null);
+  const [username, setUsername] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [tier, setTier] = useState<number | null>(null);
+  const [profileImage, setProfileImage] = useState<string>("");
+  const [showCard, setShowCard] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [hasChecked, setHasChecked] = useState<boolean>(false);
 
   useEffect(() => {
@@ -45,23 +58,77 @@ export default function HomeSection() {
     };
   }, []);
 
-  const whitelisted = process.env.NEXT_PUBLIC_WALLETS?.split(",").map(w => w.trim().toLowerCase()) || [];
+  // Load tier wallets
+  const tier1Wallets = process.env.NEXT_PUBLIC_1_WALLETS?.split(",").map(w => w.trim().toLowerCase()) || [];
+  const tier2Wallets = process.env.NEXT_PUBLIC_2_WALLETS?.split(",").map(w => w.trim().toLowerCase()) || [];
+  const tier3Wallets = process.env.NEXT_PUBLIC_3_WALLETS?.split(",").map(w => w.trim().toLowerCase()) || [];
   
-  const handleCheck = () => {
-    setIsWhitelisted(whitelisted.includes(wallet.toLowerCase()));
-    setHasChecked(true);
+  const getTierName = (tier: number) => {
+    switch (tier) {
+      case 1: return "GTD Free Mint";
+      case 2: return "GTD Whitelisted";
+      case 3: return "FCFS Whitelisted";
+      case 4: return "Public Phase";
+      default: return "Unknown";
+    }
   };
 
-  const postOnX = () => {
-    const message = `🎉 Wow, I'm eligible to mint Bastards on Monad Mainnet 🎉\n Check yours :`;
-    const url = "bastards-checker.vercel.app/";
-    const hashtags = "Bastards,Monad";
+  const handleCheck = async () => {
+    if (!wallet.trim() || !username.trim()) {
+      setErrorMessage("Please enter both wallet address and X username");
+      setShowError(true);
+      return;
+    }
+
+    setIsLoading(true);
+    setShowError(false);
+    setHasChecked(false);
+    setShowCard(false);
+
+    // Check tier
+    const walletLower = wallet.toLowerCase();
+    let userTier = 4; // Default to public phase
     
-    const twitterIntent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      message
-    )}&url=${encodeURIComponent(url)}&hashtags=${hashtags}`;
-    
-    window.open(twitterIntent, "_blank");
+    if (tier1Wallets.includes(walletLower)) {
+      userTier = 1;
+    } else if (tier2Wallets.includes(walletLower)) {
+      userTier = 2;
+    } else if (tier3Wallets.includes(walletLower)) {
+      userTier = 3;
+    }
+
+    setTier(userTier);
+
+    // Fetch X profile image via API route
+    try {
+      const cleanUsername = username.trim().replace(/^@/, "");
+      const response = await fetch(`/api/profile?username=${encodeURIComponent(cleanUsername)}`);
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch profile");
+      }
+
+      const data = await response.json();
+      
+      console.log("API Response:", data); // Debug log
+      
+      if (!data.profile_image || data.profile_image === null || data.profile_image === "") {
+        throw new Error("Profile image not found");
+      }
+
+      setProfileImage(data.profile_image);
+      setIsLoading(false);
+      setShowCard(true);
+      setHasChecked(true);
+    } catch (error: any) {
+      console.error("Error fetching profile:", error); // Debug log
+      setIsLoading(false);
+      setHasChecked(true); // Keep check button visible on error
+      setShowCard(false);
+      setErrorMessage(`Couldn't load profile image. ${error.message || "Please check the username and try again."}`);
+      setShowError(true);
+    }
   };
 
   return (
@@ -107,16 +174,16 @@ export default function HomeSection() {
         <div className="flex items-center">
           <Image
             src="/bas_logo.png"
-            alt="Bastards Logo"
+            alt="Basterds Logo"
             width={35}
             height={35}
             className="ml-3 mb-1 object-contain"
           />
-          <span className="text-white text-2xl font-bold inline xs:hidden">astards</span>
+          <span className="text-white text-2xl font-bold inline xs:hidden">asterds</span>
         </div>
         
         <div className="flex items-center gap-1 mr-3">
-          <a href="https://x.com/bastards_xyz" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition">
+          <a href="https://x.com/basterds_xyz" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition">
             <Image
               src="/x-logo.png"
               alt="X Logo"
@@ -125,7 +192,7 @@ export default function HomeSection() {
               className="object-contain w-8 h-8 sm:w-8 sm:h-8"
             />
           </a>
-          <a href="https://discord.com/invite/bastards-1353038611154599986" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition">
+          <a href="https://discord.com/invite/basterds-1353038611154599986" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition">
             <Image
               src="/dc-logo.png"
               alt="Discord Logo"
@@ -141,7 +208,7 @@ export default function HomeSection() {
 
       <div className="absolute top-18 sm:top-20 left-1/2 transform -translate-x-1/2 text-center z-20 px-2 w-full max-w-7xl">
         <p className={`${chewy.className} text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl`}>
-          The Bastards step first into Monad.
+          The Basterds step first into Monad.
         </p>
         <p className="text-md sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-2" style={{ fontFamily: 'Arial' }}>
           Check your whitelist status now — the mainnet awaits the bold.
@@ -150,42 +217,61 @@ export default function HomeSection() {
 
       <div className="absolute top-54 sm:top-56 md:top-53 left-1/2 lg:left-25 transform -translate-x-1/2 lg:translate-x-0 flex flex-col items-start bg-purple-200/90 p-6 sm:p-8 rounded-3xl z-20 w-11/12 sm:w-4/5 md:w-3/5 lg:w-130 max-w-2xl shadow-2xl">
         <p className="text-black text-base sm:text-lg mb-4 sm:mb-6 italic font-semibold">
-          Enter your wallet address to check your WL status.
+          Enter your wallet and X username.
         </p>
+        
         <input
           type="text"
           placeholder="0x...."
           value={wallet}
           onChange={(e) => setWallet(e.target.value)}
-          className="px-4 sm:px-6 py-3 sm:py-4 rounded-2xl text-gray-600 w-full bg-white/60 mb-4 text-sm sm:text-base"
+          className="px-4 sm:px-6 py-3 sm:py-4 rounded-2xl text-gray-600 w-full bg-white/60 mb-3 text-sm sm:text-base"
         />
-        
-        {!hasChecked && (
-          <button
-            onClick={handleCheck}
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-pink-500 via-purple-900 to-pink-500 text-white font-bold rounded-2xl hover:scale-105 transition w-full text-base sm:text-lg"
-          >
-            Check Wallet
-          </button>
-        )}
 
-        {hasChecked && (
-          <div className="mt-4 flex flex-row sm:flex-row items-center justify-center gap-4 w-full">
-            {isWhitelisted ? (
-              <>
-                <p className="text-green-800 text-lg sm:text-xl font-bold">Whitelisted ✅</p>
-                <button
-                  onClick={postOnX}
-                  className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-2xl hover:scale-105 transition text-sm sm:text-base"
-                >
-                  Share on X
-                </button>
-              </>
-            ) : (
-              <p className="text-red-600 text-lg sm:text-xl font-bold">Not Whitelisted ❌</p>
-            )}
-          </div>
-        )}
+        <div className="flex flex-col sm:flex-row gap-3 w-full">
+          <input
+            type="text"
+            placeholder="X username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="px-4 sm:px-6 py-3 sm:py-4 rounded-2xl text-gray-600 flex-1 bg-white/60 text-sm sm:text-base"
+          />
+          
+          {showCard ? (
+            <LightningRingCard
+              bgImage={`/${tier}.png`}
+              profilePic={profileImage}
+              username={`@${username.replace(/^@/, "")}`}
+            />
+          ) : (
+            <button
+              onClick={handleCheck}
+              disabled={isLoading}
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-pink-500 via-purple-900 to-pink-500 text-white font-bold rounded-2xl hover:scale-105 transition text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto w-full"
+            >
+              {isLoading ? "Loading..." : "Check"}
+            </button>
+          )}
+        </div>
+
+        {/* Error Dialog */}
+        <Dialog open={showError} onOpenChange={setShowError}>
+          <DialogContent className="bg-white rounded-2xl p-6 max-w-md">
+            <VisuallyHidden>
+              <DialogTitle>Error</DialogTitle>
+            </VisuallyHidden>
+            <div className="text-center">
+              <p className="text-red-600 text-lg font-bold mb-4">❌ Error</p>
+              <p className="text-gray-700">{errorMessage}</p>
+              <button
+                onClick={() => setShowError(false)}
+                className="mt-4 px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-xl hover:scale-105 transition"
+              >
+                Close
+              </button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Desktop - positioned on right */}
@@ -202,7 +288,7 @@ export default function HomeSection() {
         <div className="relative top-40 w-100 h-45">
           <Image
             src="/bastards.png"
-            alt="Bastards Overlay"
+            alt="Basterds Overlay"
             fill
             className="absolute top-0 left-0"
           />
@@ -210,7 +296,7 @@ export default function HomeSection() {
         <div className="relative top-40 w-100 h-19 mt-[-24px]">
           <Image
             src="/bastards_flipped.png"
-            alt="Flipped Bastards Overlay"
+            alt="Flipped Basterds Overlay"
             fill
             className="absolute top-0 left-0 opacity-50"
           />
@@ -218,35 +304,35 @@ export default function HomeSection() {
       </div>
 
       {/* Mobile - positioned below wallet box */}
-<div className="lg:hidden flex flex-col items-center relative z-10 mt-[420px] sm:mt-[460px] md:mt-[500px] px-4 pb-0 mb-[-10px] overflow-hidden">
-  <div className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
-    <Image
-      src="/monad-logo.png"
-      alt="Monad Logo"
-      fill
-      className="animate-spin object-contain"
-      style={{ animation: "spin 10s linear infinite" }}
-    />
-  </div>
+      <div className="lg:hidden flex flex-col items-center relative z-10 mt-[420px] sm:mt-[460px] md:mt-[500px] px-4 pb-0 mb-[-10px] overflow-hidden">
+        <div className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+          <Image
+            src="/monad-logo.png"
+            alt="Monad Logo"
+            fill
+            className="animate-spin object-contain"
+            style={{ animation: "spin 10s linear infinite" }}
+          />
+        </div>
 
-  <div className="relative w-90 h-36 sm:w-80 sm:h-36 z-2 -mt-36">
-    <Image
-      src="/bastards.png"
-      alt="Bastards Overlay"
-      fill
-      className="object-contain"
-    />
-  </div>
+        <div className="relative w-90 h-36 sm:w-80 sm:h-36 z-2 -mt-36">
+          <Image
+            src="/bastards.png"
+            alt="Basterds Overlay"
+            fill
+            className="object-contain"
+          />
+        </div>
 
-  <div className="relative w-76 h-30 sm:w-80 sm:h-16 z-1 -mt-10 mb-[-20px]">
-    <Image
-      src="/bastards_flipped.png"
-      alt="Flipped Bastards Overlay"
-      fill
-      className="object-contain opacity-50"
-    />
-  </div>
-</div>
+        <div className="relative w-76 h-30 sm:w-80 sm:h-16 z-1 -mt-10 mb-[-20px]">
+          <Image
+            src="/bastards_flipped.png"
+            alt="Flipped Basterds Overlay"
+            fill
+            className="object-contain opacity-50"
+          />
+        </div>
+      </div>
 
       <div className="absolute inset-0 z-0" />
     </div>
