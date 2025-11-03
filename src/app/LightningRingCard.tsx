@@ -254,7 +254,7 @@ export default function LightningRingDialog({
               </div>
 
               {/* Profile */}
-              <div className="lg:ml-3 ml-1.5 lg:mb-4 mb-3 absolute inset-0 flex flex-col items-center justify-center z-20">
+              <div className="lg:ml-1.5 ml-1.5 lg:mb-4 mb-3 absolute inset-0 flex flex-col items-center justify-center z-20">
                 <div className="relative -mt-[35%] sm:-mt-[35%]">
                   <div className="w-[55px] h-[55px] sm:w-[110px] sm:h-[110px] rounded-full overflow-hidden border-[2.5px] sm:border-[3px] border-white shadow-2xl bg-white">
                     <div
