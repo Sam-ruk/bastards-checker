@@ -142,7 +142,7 @@ export default function HomeSection() {
             backgroundImage: "url('/main-bg.png')", 
             backgroundSize: "200% 100%", 
             backgroundPosition: "left center",
-            height: "490px",
+            height: "520px",
             maskImage: "linear-gradient(to bottom, white 90%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, white 90%, transparent 100%)"
           }}
