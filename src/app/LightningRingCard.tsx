@@ -137,17 +137,17 @@ export default function LightningRingDialog({
       ctx.restore();
 
       // Username badge
-      ctx.font = "bold 7px system-ui, -apple-system, sans-serif";
+      ctx.font = "bold 9px system-ui, -apple-system, sans-serif";
       const textW = ctx.measureText(username).width;
       const badgeX = profileX + profileSize / 2;
       const badgeY = profileY + profileSize + 10;
-      const pad = 5;
+      const pad = 8;
       const badgeH = 17;
 
       ctx.save();
-      ctx.fillStyle = "rgba(0,0,0,1)";
+      ctx.fillStyle = "rgba(0,0,0,0.7)";
       ctx.strokeStyle = "rgba(255,255,255,0.7)";
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.roundRect(badgeX - textW / 2 - pad, badgeY - badgeH / 2, textW + pad * 2, badgeH, 9999);
       ctx.fill();
@@ -212,7 +212,8 @@ export default function LightningRingDialog({
               {/* Lightning Ring */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                <motion.div
-                className="w-[80%] aspect-square translate-y-[-22%] sm:translate-y-[-23%]"
+                className="w-[79%] aspect-square"
+                style={{ y: '-23%' }}
                   animate={{ rotate: 360 }}
                   transition={{
                     rotate: { duration: 8, repeat: Infinity, ease: "linear" },
@@ -254,15 +255,15 @@ export default function LightningRingDialog({
               </div>
 
               {/* Profile */}
-              <div className="lg:ml-1.5 ml-1.5 lg:mb-4 mb-3 absolute inset-0 flex flex-col items-center justify-center z-20">
-                <div className="relative -mt-[35%] sm:-mt-[35%]">
-                  <div className="w-[55px] h-[55px] sm:w-[110px] sm:h-[110px] rounded-full overflow-hidden border-[2.5px] sm:border-[3px] border-white shadow-2xl bg-white">
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
+                <div className="relative" style={{ marginTop: '-35%' }}>
+                  <div className="w-[70px] h-[70px] rounded-full overflow-hidden border-[3px] border-white shadow-2xl bg-white">
                     <div
                       className="w-full h-full bg-cover bg-center"
                       style={{ backgroundImage: `url(${profilePic})` }}
                     />
                   </div>
-                  <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-1 py-0.5 sm:px-2 sm:py-0.5 rounded-full border-[1.5px] sm:border-2 border-white/70 bg-black/70 backdrop-blur-sm text-white text-[6px] sm:text-[11px] font-bold shadow-lg">
+                  <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-full border-2 border-white/70 bg-black/70 backdrop-blur-sm text-white text-[9px] font-bold shadow-lg">
                     {username}
                   </div>
                 </div>
